@@ -1,8 +1,18 @@
 {
   "compilerOptions": {
-    "module": "nodenext",
-    "target": "ES2021",
-    "types": ["node"],
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "lib": ["DOM", "ES2018", "DOM.Iterable"],
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2018",
+    "downlevelIteration": true,
+    "module": "ESNext",
+    "outDir": "dist",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
     "allowImportingTsExtensions": true,
     "noEmit": true
   }

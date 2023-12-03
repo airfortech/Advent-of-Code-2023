@@ -13,9 +13,10 @@ interface Array<T> {
   normalize2dArray(nullish?: string | 0 | null | undefined): [][];
   simplify2dArray(nullish?: string | 0 | null | undefined): any;
   extend2dArray(
-    direction: "left" | "right" | "top" | "bottom",
+    direction: 'left' | 'right' | 'top' | 'bottom',
     nullish?: any
   ): any;
+  getAdjacentNumbers(index: number): (number | string)[];
 }
 
 Array.prototype.sum = function (): number {
@@ -43,13 +44,13 @@ Array.prototype.union = function (array: any[]): any[] {
 Array.prototype.difference = function (array: any[]): any[] {
   let a = new Set(this);
   let b = new Set(array);
-  return Array.from(new Set([...a].filter(x => !b.has(x))));
+  return Array.from(new Set([...a].filter((x) => !b.has(x))));
 };
 
 Array.prototype.intersection = function (array: any[]): any[] {
   let a = new Set(this);
   let b = new Set(array);
-  return Array.from(new Set([...a].filter(x => b.has(x))));
+  return Array.from(new Set([...a].filter((x) => b.has(x))));
 };
 
 Array.prototype.match = function (array: any[]): boolean {
@@ -109,14 +110,30 @@ Array.prototype.rotate2dArray = function (deg: 90 | 180 | 270): any[][] {
   return arr;
 };
 
+Array.prototype.getAdjacentNumbers = function (
+  index: number
+): (number | string)[] {
+  let arr = this as any[];
+  const numbers = [arr[index]];
+  for (let i = index + 1; i < arr.length; i++) {
+    if (!isNaN(+arr[i])) numbers.push(arr[i]);
+    else break;
+  }
+  for (let i = index - 1; i >= 0; i--) {
+    if (!isNaN(+arr[i])) numbers.unshift(arr[i]);
+    else break;
+  }
+  return numbers;
+};
+
 Array.prototype.extend2dArray = function (
-  direction: "left" | "right" | "top" | "bottom",
+  direction: 'left' | 'right' | 'top' | 'bottom',
   nullish: any = null
 ): any {
   let arr = this as any[][];
-  if (direction === "right") return arr.map((a: any[]) => [...a, nullish]);
-  if (direction === "left") return arr.map((a: any[]) => [nullish, ...a]);
-  if (direction === "top") return [Array(arr[0].length).fill(nullish), ...arr];
-  if (direction === "bottom")
+  if (direction === 'right') return arr.map((a: any[]) => [...a, nullish]);
+  if (direction === 'left') return arr.map((a: any[]) => [nullish, ...a]);
+  if (direction === 'top') return [Array(arr[0].length).fill(nullish), ...arr];
+  if (direction === 'bottom')
     return [...arr, Array(arr[0].length).fill(nullish)];
 };
