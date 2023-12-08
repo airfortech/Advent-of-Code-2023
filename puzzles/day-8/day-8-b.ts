@@ -7,4 +7,5 @@ export async function day8b(dataPath?: string) {
 }
 
 const answer = await day8b();
+console.log(answer);
 console.log(chalk.bgGreen('Your Answer:'), chalk.green(answer));
