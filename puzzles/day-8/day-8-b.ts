@@ -69,5 +69,7 @@ export async function day8b(dataPath?: string) {
   return leastCommonMultiple(steps);
 }
 
+console.time('time');
 const answer = await day8b();
+console.timeEnd('time');
 console.log(chalk.bgGreen('Your Answer:'), chalk.green(answer));
